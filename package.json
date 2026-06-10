@@ -1,0 +1,16 @@
+{
+  "name": "chaos-app",
+  "version": "1.0.0",
+  "description": "Yu-Gi-Oh Power of Chaos - iOS app",
+  "private": true,
+  "scripts": {
+    "build": "echo 'static web app - nothing to build'"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/ios": "^6.1.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.2"
+  }
+}
