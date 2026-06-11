@@ -1,0 +1,49 @@
+name: بناء تطبيق APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: تنزيل الملفات
+        uses: actions/checkout@v4
+
+      - name: تجهيز Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: تجهيز Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: تجهيز Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: تثبيت الحزم
+        run: npm install
+
+      - name: إضافة منصة أندرويد
+        run: npx cap add android
+
+      - name: مزامنة الملفات
+        run: npx cap sync android
+
+      - name: بناء APK
+        run: |
+          cd android
+          chmod +x ./gradlew
+          ./gradlew assembleDebug
+
+      - name: رفع APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: aswaq-fakahani-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
