@@ -1,8 +1,0 @@
-{
-  "appId": "com.aswaqfakahani.dashboard",
-  "appName": "لوحة الفكهاني",
-  "webDir": "www",
-  "server": {
-    "androidScheme": "https"
-  }
-}
