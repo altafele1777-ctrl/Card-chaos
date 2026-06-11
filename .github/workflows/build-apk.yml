@@ -26,6 +26,30 @@ jobs:
       - name: تجهيز Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: تجهيز المجلدات والإعدادات
+        run: |
+          mkdir -p www
+          if [ -f index.html ]; then cp index.html www/index.html; fi
+          cat > capacitor.config.json << 'EOF'
+          {
+            "appId": "com.aswaqfakahani.dashboard",
+            "appName": "لوحة الفكهاني",
+            "webDir": "www"
+          }
+          EOF
+          cat > package.json << 'EOF'
+          {
+            "name": "aswaq-dashboard",
+            "version": "1.0.0",
+            "private": true,
+            "devDependencies": { "@capacitor/cli": "^6.1.2" },
+            "dependencies": {
+              "@capacitor/core": "^6.1.2",
+              "@capacitor/android": "^6.1.2"
+            }
+          }
+          EOF
+
       - name: تثبيت الحزم
         run: npm install
 
